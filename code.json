@@ -1,0 +1,14 @@
+ {/* <Modal.Dialog>
+        <Modal.Header >
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>Modal body text goes here.</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <button className="btn btn-danger" onClick={()=> setOpen(!open)}>Close</button>
+          <button className="btn btn-dark">Book Now</button>
+        </Modal.Footer>
+      </Modal.Dialog> */}

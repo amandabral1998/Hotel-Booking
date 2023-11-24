@@ -1,0 +1,89 @@
+/* .navbar {
+ border-bottom: 0.5px  solid gray; 
+ background: rgb(248, 245, 245);
+
+}
+
+.navbar-brand {
+    font-weight: 750;
+    font-style: italic;
+    font-size: 2rem;
+}
+
+.collapse  {
+    font-weight: 500 !important;
+    font-size: 1.2rem;
+} */
+
+
+/* .search {
+    width: 50% !important;
+} */
+/* @media (max-width:992px) {
+    .search {
+        width: 100% !important;
+        
+    }
+} */
+
+  
+  /* Navbar styles */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.5px  solid gray; 
+    background: rgb(248, 245, 245);
+    padding: 15px;
+   
+  }
+  
+  .navbar-left {
+    flex: 1;
+    font-weight: 750;
+    font-style: italic;
+    font-size: 1.5rem;
+  }
+  
+  .navbar-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    font-weight: 500 !important;
+    font-size: 1.2rem;
+  }
+  
+  .userName {
+    color: rgb(231, 56, 56);
+  }
+  /* Style for links */
+  .navbar-right a {
+  
+    text-decoration: none;
+    margin-left: 20px;
+  }
+  
+  /* Media query for responsive design */
+  @media screen and (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      text-align: center;
+     align-items: center;
+     justify-content: center;
+    }
+  
+    /* .navbar-left,
+    .navbar-right {
+      flex: unset;
+      width: 100%;
+      margin-bottom: 10px;
+    } */
+  
+    .navbar-right a {
+      margin: 0;
+      display: block;
+    }
+  }
+  

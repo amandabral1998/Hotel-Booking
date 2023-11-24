@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Standard Single Room",
+    "desc": "Experience comfort and coziness in our Standard Single Room. This room is perfect for solo travelers looking for a relaxing stay. The room features a comfortable bed, ensuring a peaceful night's sleep. Enjoy the warm ambiance and modern amenities. Whether you're here for business or leisure, our Standard Single Room is designed to cater to your needs. Make your stay memorable and stress-free with our impeccable service and attention to detail.",
+    "type": "single",
+    "price": 100,
+    "img": ["https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWslMjByb29tfGVufDB8fDB8fHww" , "https://images.unsplash.com/photo-1576354302919-96748cb8299e?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGhvdGVslMjByb29tfGVufDB8fDB8fHww" , "https://images.unsplash.com/photo-1630660664869-c9d3cc676880?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdGVslMjByb29tfGVufDB8fDB8fHww"]
+  },
+  {
+    "name": "Standard Double Room",
+    "desc": "Indulge in the spacious comfort of our Standard Double Room. Perfect for couples or those who prefer more space, this room features two cozy beds for a restful night's sleep. The room's warm ambiance and modern amenities provide a welcoming atmosphere for your stay. Whether you're on a romantic getaway or traveling with a friend, our Standard Double Room ensures a memorable and comfortable experience with top-notch service and attention to detail.",
+    "type": "double",
+    "price": 150,
+    "img": ["https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWslMjByb29tfGVufDB8fDB8fHww" , "https://plus.unsplash.com/premium_photo-1674676471380-1258cb31b3ac?auto.format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTdfGhvdGVslMjByb29tfGVufDB8fDB8fHww" , "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fGhvdGVslMjByb29tfGVufDB8fDB8fHww"]
+  },
+  {
+    "name": "Luxury Suite",
+    "desc": "Elevate your stay with our luxurious Luxury Suite. Enjoy stunning views and a range of amenities for an unforgettable experience. This spacious suite is perfect for those seeking the ultimate in comfort and relaxation. Whether you're on a special occasion or simply want to treat yourself, our Luxury Suite is designed to exceed your expectations. Immerse yourself in opulence and enjoy impeccable service and attention to detail throughout your stay.",
+    "type": "suite",
+    "price": 250,
+    "img": ["https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWslMjByb29tfGVufDB8fDB8fHww"]
+  }
+]
