@@ -1,15 +1,37 @@
 import "../css/Booking.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
+import { DataContext } from "../Context/DataContext";
 
 const Booking = () => {
   const [bookingdata, setBookingData] = useState("");
   const id = useParams();
   const { bookingid } = id;
-  const navigate = useNavigate()
- 
+  const navigate = useNavigate();
+  const { fromDate, toDate } = useContext(DataContext);
+
+  // Calculating Days
+  const fromDateStr = `${fromDate}`;
+  const toDateStr = `${toDate}`;
+
+  // Split the date strings and create Date objects
+  const [day1, month1, year1] = fromDateStr.split("/").map(Number);
+  const [day2, month2, year2] = toDateStr.split("/").map(Number);
+
+  // Note: Months are zero-indexed in JavaScript Dates, so subtract 1 from the month
+  const from = new Date(year1, month1 - 1, day1);
+  const to = new Date(year2, month2 - 1, day2);
+
+  // Calculate the difference in milliseconds
+  const differenceInMs = to - from;
+
+  // Convert milliseconds to days
+  const millisecondsInDay = 1000 * 60 * 60 * 24;
+  const differenceInDays = Math.floor(differenceInMs / millisecondsInDay);
+// Days Calculation finished here
+
   useEffect(() => {
     try {
       const axiosInstance = axios.create({
@@ -27,41 +49,41 @@ const Booking = () => {
     }
   }, [bookingid]);
 
-  // Booking Room 
+  // Booking Room
   const handleBooking = async () => {
-    const userDetail = JSON.parse(localStorage.getItem('user'));
+    const userDetail = JSON.parse(localStorage.getItem("user"));
     const userDetails = userDetail.user;
 
     const bookingObj = {
       user: userDetails.id,
       name: bookingdata.name,
       price: bookingdata.price,
-      from: '27/12/2023',
-      to: '28/12/2023',
-      days: 4
+      from: fromDate,
+      to: toDate,
+      days: differenceInDays,
+      amount : differenceInDays * bookingdata.price
     };
-    
 
     try {
       const axiosInstance = axios.create({
         withCredentials: true,
       });
-      const response = await axiosInstance.post("http://localhost:3000/api/booking", bookingObj);
+      const response = await axiosInstance.post(
+        "http://localhost:3000/api/booking",
+        bookingObj
+      );
       toast.success("Successfully Room Booked", {
         position: "top-right",
         autoClose: 3000,
       });
       setTimeout(() => {
-        navigate('/');
+        navigate("/");
       }, 2000);
     } catch (error) {
       console.log("Error Occurred", error.name);
     }
   };
 
-
- 
- 
   return (
     <div className='booking-page'>
       <div className='booking-image'>
@@ -73,19 +95,22 @@ const Booking = () => {
           <strong>Name:</strong> {bookingdata.name}
         </p>
         <p>
-          <strong>From:</strong> 2023-11-15
+          <strong>From:</strong> {fromDate}
         </p>
         <p>
-          <strong>To:</strong> 2023-11-20
+          <strong>To:</strong> {toDate}
         </p>
         <p>
-          <strong>Days:</strong>4
+          <strong>Days:</strong>
+          {differenceInDays}
         </p>
         <p>
           <strong>Price:</strong> Rs.
-          {bookingdata.price}
+          {bookingdata.price * differenceInDays}
         </p>
-        <button className=' btn-book' onClick={()=>handleBooking()}>Book Now</button>
+        <button className=' btn-book' onClick={() => handleBooking()}>
+          Book Now
+        </button>
         {/* {console.log(bookingdata)}
         {console.log(userDetails)} */}
       </div>

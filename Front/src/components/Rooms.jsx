@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "../css/Room.css";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import { DatePicker, Space } from "antd";
+import { DataContext } from "../Context/DataContext";
 
 const Rooms = () => {
   const [data, setData] = useState();
@@ -13,9 +14,9 @@ const Rooms = () => {
   const { RangePicker } = DatePicker;
   const [searchValue, setSearchValue] = useState("");
   const [filterPrice, setFilterPrice] = useState("all");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-
+  // const [fromDate, setFromDate] = useState("");
+  // const [toDate, setToDate] = useState("");
+const {setFromDate , fromDate , toDate , setToDate} = useContext(DataContext)
   useEffect(() => {
     try {
       const axiosInstance = axios.create({
@@ -31,24 +32,16 @@ const Rooms = () => {
     }
   }, []);
 
-  // const filterDates =  (dates) => {
-  //   // console.log(dates[0].format("DD/MM/YY"));
-  //   // console.log(dates[1].format("DD/MM/YY"));
-  //    setFromDate(dates[0].format("DD/MM/YY"));
-  //   setToDate(dates[0].format("DD/MM/YY"));
-  //   console.log(fromDate, toDate);
-  // };
-  const filterDates = (dates) => {
-    if (dates && dates.length === 2) {
-      const fromDateFormatted = dates[0].format("DD/MM/YY");
-      const toDateFormatted = dates[1].format("DD/MM/YY");
-  
-      setFromDate(fromDateFormatted);
-      setToDate(toDateFormatted);
-  
-      console.log(fromDateFormatted, toDateFormatted);
-    }
+  const filterDates =  (dates) => {
+    // console.log(dates[0].format("DD/MM/YY"));
+    // console.log(dates[1].format("DD/MM/YY"));
+     setFromDate(dates[0].format("DD/MM/YY"));
+    setToDate(dates[1].format("DD/MM/YY"));
+    
   };
+ 
+  
+  
 
   return (
     <div className='main-container'>

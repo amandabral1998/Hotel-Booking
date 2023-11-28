@@ -6,8 +6,8 @@ const router = require('./controller/main')
 
 
 app.use(cors({
-    origin: 'http://localhost:5173', // Replace with your frontend's origin
-    credentials: true, // Enable credentials (cookies) in requests
+    origin: 'http://localhost:5173',
+    credentials: true, 
   }));
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))

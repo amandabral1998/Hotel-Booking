@@ -12,7 +12,8 @@ router.post('/' , async(req, res)=>{
             days: days ,
             from: from ,
             to: to ,
-            name: name
+            name: name,
+            amount: days * price
             
         })
         const savedBooking = await newBooking.save()
@@ -20,6 +21,27 @@ router.post('/' , async(req, res)=>{
     } catch (error) {
      console.log('Error Occured' , error.name);   
      res.status(500).json('Error Creating Booking')
+    }
+})
+
+
+router.get('/' , async(req, res)=>{
+    const {user} = req.body
+    const userid = new mongoose.Types.ObjectId(user);
+    console.log(userid);
+
+    try {
+        const ReservationData = await Reservation.findOne({user:userid})
+        if(ReservationData) {
+            res.status(201).send(ReservationData)
+        }
+        else {
+            res.status(404).json({ message: 'Booking not found' });
+        }
+   
+    } catch (error) {
+        console.log('Error Occured' , error.name);
+        res.status(400).json('Error fetching reservation Data')
     }
 })
 

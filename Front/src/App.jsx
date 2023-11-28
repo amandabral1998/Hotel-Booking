@@ -7,10 +7,18 @@ import Login from "./components/Login";
 import Header from "./components/Header";
 import Signup from "./components/Signup";
 import Booking from "./components/Booking";
+import { DataProvider } from "./Context/DataContext";
+import Reservation from "./components/Reservation";
+import AdminPage from "./components/AdminPage";
+import User from "./components/User";
+import AddRoom from "./components/AddRoom";
 
 function App() {
   return (
     <>
+    <DataProvider>
+
+  
       <ToastContainer />
       <Header />
       <Routes>
@@ -18,7 +26,13 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Signup />} />
         <Route path="/book/:bookingid" element={<Booking/>}/>
+        <Route path="/reservation" element={<Reservation/>}/>
+       <Route path="/admin" element={<AdminPage/>}>
+        <Route path="/admin/:user" element={<User/>}/>
+        <Route path="/admin/:add-room" element={<AddRoom/>}/>
+        </Route>
       </Routes>
+      </DataProvider>
     </>
   );
 }

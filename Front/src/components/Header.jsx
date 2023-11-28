@@ -14,9 +14,12 @@ const Header = () => {
           Home
         </Link>
 
+        <Link to={"/reservation"} className='link nav-link'>
+          Bookings
+        </Link>
         {user && user.user.admin && (
-          <Link to={""} className='link nav-link'>
-            Add Room
+          <Link to={"/admin"} className='link nav-link'>
+            Admin Panel
           </Link>
         )}
         {!user ? (
@@ -37,10 +40,9 @@ const Header = () => {
                 const confirm = window.confirm("Are you sure want to logout?");
                 if (confirm) {
                   localStorage.removeItem("user");
-                
-                    navigate("/");
-                 
-                 
+
+                  navigate("/");
+
                   // window.location.reload();
                 }
               }}
@@ -56,11 +58,7 @@ const Header = () => {
             </svg>
           </span>
         )}
-        {/* {!user.user.admin ? (null) : (
-          <Link to={""} className='link nav-link'>
-            Add Hotel
-          </Link>
-        )} */}
+       
       </div>
     </nav>
   );

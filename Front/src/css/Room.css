@@ -67,7 +67,7 @@
   max-width: 100%;
   border-radius: 7px;
   overflow: hidden;
-height: 33px;
+height: 33px; 
 }
 
 .filter-input:first-of-type:hover {
@@ -76,8 +76,8 @@ height: 33px;
 }
 
 .filter-input:nth-child(2) {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
 }
 .filter-input:nth-child(3){
   width: 160px;
@@ -115,11 +115,11 @@ outline: none;
     width: 90%;
   }
   .filter-input {
-   width: 140px;
+   width: 140px !important;
   }
 
   .filter-input:first-of-type {
-    width: 140px;
+    width: 140px !important;
   }
 }
 

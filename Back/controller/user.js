@@ -81,4 +81,18 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get('/getusers' , async(req, res)=>{
+  try {
+    const users = await User.find()
+    if(users){
+      res.status(201).send(users)
+    }
+    else {
+      res.status(404).json('Unable to get User Data')
+    }
+  } catch (error) {
+    console.log('Error fetching User Data' , error.name);
+  }
+})
+
 module.exports = router;

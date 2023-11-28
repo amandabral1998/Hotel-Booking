@@ -26,6 +26,9 @@ const reservationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  amount : {
+    type: Number
+  }
 });
 
 const Reservation = mongoose.model("Reservation", reservationSchema);

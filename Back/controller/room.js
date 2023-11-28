@@ -16,7 +16,7 @@ router.get('/get-rooms' , async (req , res)=>{
 router.post('/get-rooms', async (req, res) => {
   const {_id} = req.body
   const roomid = new mongoose.Types.ObjectId(_id);
- 
+
 
   try {
 

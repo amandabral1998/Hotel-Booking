@@ -14,6 +14,7 @@ const roomSchema = new mongoose.Schema({
         type:Number ,
         required: true
     } ,
+    img: [] ,
     currentBooking: []
 })
 
