@@ -7,19 +7,20 @@ const Reservation = () => {
   const userDetails = userDet.user.id
   
   useEffect(()=>{
+    const fetchData = async() => {
     try {
       const axiosInstance = axios.create({
         withCredentials: true ,
        })
-       axiosInstance.get("http://localhost:3000/api/booking" , { user:`${userDetails}`} )
-       .then((res)=>{
-        setReservationData(res.data)
-       })
+      
+        const response = await axiosInstance.get("http://localhost:3000/api/booking", { params: { user: userDetails.toString() } })
+        setReservationData(response.data);
     } catch (error) {
-      console.log('Error Occured Fetching Reservation Data' , error.name);
+      console.log('Error Occured Fetching Reservation Data' , error);
     }
-
-  })
+    };
+    fetchData();
+  } ,[userDetails]);
   return (
    
     <div className='room-details-container'>

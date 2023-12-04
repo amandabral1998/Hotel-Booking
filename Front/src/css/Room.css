@@ -14,6 +14,7 @@
   border: 0.1px solid lightgray;
 }
 
+
 .room-container {
   width: 100%;
   padding: 1rem;
@@ -63,7 +64,7 @@
 
 .filter-input {
   border: 0.5px solid gray;
-  min-width: 160px;
+  width: 160px;
   max-width: 100%;
   border-radius: 7px;
   overflow: hidden;
@@ -114,12 +115,16 @@ outline: none;
   .container {
     width: 90%;
   }
+
+  .filter-container {
+    width: 100%;
+  }
   .filter-input {
-   width: 140px !important;
+   width: 180px !important;
   }
 
   .filter-input:first-of-type {
-    width: 140px !important;
+    width: 180px !important;
   }
 }
 
@@ -157,15 +162,16 @@ outline: none;
 
   .filter-container {
     flex-direction: column;
+    align-items: center;
   }
 
   .filter-input {
-    width: 100% !important;
+    width: 60% !important;
    }
  
-   .filter-input:nth-child(3){
-  width: fit-content !important;
-  }
+   .filter-input:first-of-type {
+     width: 60% !important;
+   }
 }
 
 .bookbtn {
@@ -187,10 +193,14 @@ outline: none;
   }
 
   .title {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
+
   .viewDetails {
-    font-size: 0.8rem !important;
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+    font-size: 0.7rem !important;
   }
 }

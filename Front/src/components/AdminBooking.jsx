@@ -3,17 +3,17 @@ import {useEffect,  useState }  from 'react'
 import axios from 'axios'
 
 
-const User = () => {
-  const [userData , setUserData]= useState()
+const AdminBooking = () => {
+  const [data , setData]= useState()
   useEffect(() => {
     try {
       const axiosInstance = axios.create({
         withCredentials: true,
       });
       axiosInstance
-        .get("http://localhost:3000/api/user/getusers")
+        .get("http://localhost:3000/api/booking/admin-Bookings")
         .then((res) => {
-          setUserData(res.data);
+          setData(res.data);
         });
     } catch (error) {
       console.log("Error Occured", error.name);
@@ -21,21 +21,25 @@ const User = () => {
   }, []);
   return (
     <div className="user-info">
-      {/* <h3>User Information</h3> */}
+      {/* <h3>Bookings</h3> */}
       <table>
         <tbody>
           <tr>
             <td><strong>User ID</strong></td>
-            <td><strong>Email</strong></td>
-            <td><strong>Username</strong></td>
+            <td><strong>Room</strong></td>
+            <td><strong>From</strong></td>
+            <td><strong>To</strong></td>
+            <td><strong>Amount</strong></td>
             
             
           </tr>
-          {userData  && userData.map((user , index)=>{
+          {data  && data.map((booking , index)=>{
             return  <tr key={index}>
-            <td>{user._id}</td>
-              <td>{user.email}</td>
-              <td>{user.username}</td>
+            <td>{booking.user}</td>
+              <td>{booking.name}</td>
+              <td>{booking.from}</td>
+              <td>{booking.to}</td>
+              <td> Rs.{booking.amount}</td>
             </tr>
           })}
          
@@ -46,4 +50,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default AdminBooking;

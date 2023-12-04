@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import { DatePicker, Space } from "antd";
 import { DataContext } from "../Context/DataContext";
+import { toast } from "react-toastify";
 
 const Rooms = () => {
   const [data, setData] = useState();
@@ -18,18 +19,27 @@ const Rooms = () => {
   // const [toDate, setToDate] = useState("");
 const {setFromDate , fromDate , toDate , setToDate} = useContext(DataContext)
   useEffect(() => {
-    try {
-      const axiosInstance = axios.create({
-        withCredentials: true,
-      });
-      axiosInstance
-        .get("http://localhost:3000/api/room/get-rooms")
-        .then((res) => {
-          setData(res.data);
+//     if(!fromDate && !toDate) {
+// toast.error('Please Select Booking Dates' , {
+//   position: "top-right", // Position of the notification
+//   autoClose: 3000, // Auto close the notification after 3 seconds
+// });
+    // }
+   
+      try {
+        const axiosInstance = axios.create({
+          withCredentials: true,
         });
-    } catch (error) {
-      console.log("Error Occured", error.name);
+        axiosInstance
+          .get("http://localhost:3000/api/room/get-rooms")
+          .then((res) => {
+            setData(res.data);
+          });
+      } catch (error) {
+        console.log("Error Occured", error.name);
+      
     }
+   
   }, []);
 
   const filterDates =  (dates) => {
@@ -46,12 +56,12 @@ const {setFromDate , fromDate , toDate , setToDate} = useContext(DataContext)
   return (
     <div className='main-container'>
       <div className='filter-container '>
-        <div className='  col-lg-4  col-md-4  filter-input'>
-          <Space direction='vertical' size={12}>
+        <div className='   filter-input'>
+          <Space direction='vertical' size={5}>
             <RangePicker format={"DD/MM/YY"} onChange={filterDates} />
           </Space>
         </div>
-        <div className='  col-lg-4  col-md-4  filter-input'>
+        <div className='   filter-input'>
           <input
             type='text'
             className='search-input'
@@ -59,7 +69,7 @@ const {setFromDate , fromDate , toDate , setToDate} = useContext(DataContext)
             onChange={(e) => setSearchValue(e.target.value)}
           />
         </div>
-        <div className='col-lg-4 col-md-4  filter-input'>
+        <div className=' filter-input'>
           <select
             style={{
               width: "100%",

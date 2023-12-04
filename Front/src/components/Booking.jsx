@@ -1,7 +1,7 @@
 import "../css/Booking.css";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams , Link} from "react-router-dom";
 import { toast } from "react-toastify";
 import { DataContext } from "../Context/DataContext";
 
@@ -84,6 +84,11 @@ const Booking = () => {
     }
   };
 
+if(!fromDate && !toDate) {
+  return <div className="nodate"><p>Please Select Booking Date</p>
+  <span><Link className='nav-link' to={'/'}>Redirect to HomePage</Link>  </span></div>
+}
+
   return (
     <div className='booking-page'>
       <div className='booking-image'>
@@ -102,11 +107,11 @@ const Booking = () => {
         </p>
         <p>
           <strong>Days:</strong>
-          {differenceInDays}
+          {differenceInDays + 1}
         </p>
         <p>
           <strong>Price:</strong> Rs.
-          {bookingdata.price * differenceInDays}
+          {bookingdata.price * (differenceInDays + 1)}
         </p>
         <button className=' btn-book' onClick={() => handleBooking()}>
           Book Now

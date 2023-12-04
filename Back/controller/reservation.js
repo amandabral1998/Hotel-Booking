@@ -45,4 +45,25 @@ router.get('/' , async(req, res)=>{
     }
 })
 
+router.get('/admin-Bookings' , async(req, res)=>{
+    // const {user} = req.body
+    // const userid = new mongoose.Types.ObjectId(user);
+    // console.log(userid);
+
+    try {
+        const ReservationData = await Reservation.find()
+        if(ReservationData) {
+            res.status(201).send(ReservationData)
+        }
+        else {
+            res.status(404).json({ message: 'Booking not found' });
+        }
+   
+    } catch (error) {
+        console.log('Error Occured' , error.name);
+        res.status(400).json('Error fetching reservation Data')
+    }
+})
+
+
 module.exports = router

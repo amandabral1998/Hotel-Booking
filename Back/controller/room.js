@@ -33,5 +33,27 @@ router.post('/get-rooms', async (req, res) => {
 });
 
 
+// Adding Room via Admin Panel
+router.post('/add-rooms', async (req, res) => {
+  try {
+    const { name, desc, type, price } = req.body;
+
+  //  if (!roomName || !description || !type || !price || !imageUrls) {
+  //     return res.status(400).json({ error: 'All fields are required' });
+  //   }
+
+  
+  
+    const newRoom = new Room({ name, desc, type, price });
+    await newRoom.save();
+
+    
+    res.status(201).json({ message: 'Room added successfully' });
+  } catch (error) {
+    console.log('Error occurred adding Room', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 module.exports = router

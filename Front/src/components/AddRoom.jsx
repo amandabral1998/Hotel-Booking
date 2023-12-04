@@ -1,59 +1,148 @@
-import { useState } from 'react';
-import '../css/AddRoom.css';
+import { useState } from "react";
+import "../css/AddRoom.css";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const AddRoom = () => {
-  const [roomName, setRoomName] = useState('');
-  const [description, setDescription] = useState('');
-  const [type, setType] = useState('');
-  const [price, setPrice] = useState('');
+  const [roomName, setRoomName] = useState("");
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState("");
+  const [price, setPrice] = useState("");
+  const [img1, setImg1] = useState("");
+  const [img2, setImg2] = useState("");
+  const [img3, setImg3] = useState("");
+  const [imgArr, setImgArr] = useState([]);
 
-  const handleAddRoom = () => {
+  const handleAddRoom = async () => {
     // Handle logic to add room
-    console.log('Room Name:', roomName);
-    console.log('Description:', description);
-    console.log('Type:', type);
-    console.log('Price:', price);
-    // Add your logic here to send this data to your backend or perform other actions
+    if (
+      !roomName ||
+      !description ||
+      !type ||
+      !price ||
+      !img1 ||
+      !img2 ||
+      !img3
+    ) {
+      toast.error("Please fill all the related Fields", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    } else {
+      // setImgArr([...imgArr , img1 , img2 , img3])
+      console.log(imgArr);
+
+      try {
+        const Rooms = {
+          name: roomName,
+          desc: description,
+          type: type,
+          price: price,
+          img: imgArr,
+        };
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+
+        await axiosInstance.post(
+          "http://localhost:3000/api/room/add-rooms",
+          Rooms
+        );
+        toast.success("Successfully Room Booked", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      } catch (error) {
+        toast.error("Error! Room not Booked", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.log("Error Occurred", error.name);
+      }
+    }
   };
 
   return (
-    <div className="add-room-container">
-      <h2>Add Room</h2>
+    <div className='add-room-container'>
       <form>
-        <label htmlFor="roomName">Room Name:</label>
-        <input
-          type="text"
-          id="roomName"
-          value={roomName}
-          onChange={(e) => setRoomName(e.target.value)}
-        />
+        <div className='holder'>
+          <input
+            type='text'
+            id='roomName'
+            placeholder='Room Name'
+            value={roomName}
+            required
+            onChange={(e) => setRoomName(e.target.value)}
+          />
 
-        <label htmlFor="description">Description:</label>
-        <textarea
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
+          <textarea
+            id='description'
+            placeholder='Room Description'
+            value={description}
+            required
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
+        </div>
 
-        <label htmlFor="type">Type:</label>
-        <input
-          type="text"
-          id="type"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        />
+        <div className='holder'>
+          <input
+            type='text'
+            id='type'
+            placeholder='Room Type'
+            value={type}
+            required
+            onChange={(e) => setType(e.target.value)}
+          />
 
-        <label htmlFor="price">Price:</label>
-        <input
-          type="number"
-          id="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
+          <input
+            type='number'
+            id='price'
+            placeholder='Price'
+            value={price}
+            required
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+        <div className='holder'>
+          <input
+            type='text'
+            id='price'
+            placeholder='image url 1'
+            value={img1}
+            required
+            onChange={(e) => {
+              setImg1(e.target.value);
+            }}
+          />
 
-        <button type="button" onClick={handleAddRoom}>
+          <input
+            type='text'
+            id='price'
+            placeholder='image url 2'
+            value={img2}
+            onChange={(e) => {
+              setImg2(e.target.value);
+            }}
+            required
+          />
+        </div>
+        <div className='holder'>
+          <input
+            type='text'
+            id='price'
+            placeholder='image url 3'
+            value={img3}
+            onChange={(e) => {
+              setImg3(e.target.value);
+            }}
+            required
+          />
+        </div>
+        <div className="holder">
+        <button type='button' onClick={handleAddRoom}>
           Add Room
         </button>
+        </div>
       </form>
     </div>
   );

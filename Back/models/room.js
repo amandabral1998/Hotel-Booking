@@ -15,7 +15,7 @@ const roomSchema = new mongoose.Schema({
         required: true
     } ,
     img: [] ,
-    currentBooking: []
+  
 })
 
 
