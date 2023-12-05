@@ -25,10 +25,10 @@ router.post('/' , async(req, res)=>{
 })
 
 
-router.get('/' , async(req, res)=>{
+router.post('/reserve' , async(req, res)=>{
     const {user} = req.body
     const userid = new mongoose.Types.ObjectId(user);
-    console.log(userid);
+    // console.log(userid);
 
     try {
         const ReservationData = await Reservation.findOne({user:userid})

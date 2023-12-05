@@ -13,7 +13,7 @@ const Reservation = () => {
         withCredentials: true ,
        })
       
-        const response = await axiosInstance.get("http://localhost:3000/api/booking", { params: { user: userDetails.toString() } })
+        const response = await axiosInstance.post("http://localhost:3000/api/booking/reserve",  { user: userDetails.toString() })
         setReservationData(response.data);
     } catch (error) {
       console.log('Error Occured Fetching Reservation Data' , error);

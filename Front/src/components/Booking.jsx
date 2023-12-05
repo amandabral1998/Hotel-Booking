@@ -10,7 +10,7 @@ const Booking = () => {
   const id = useParams();
   const { bookingid } = id;
   const navigate = useNavigate();
-  const { fromDate, toDate } = useContext(DataContext);
+  const { fromDate, toDate , setFromDate , setToDate} = useContext(DataContext);
 
   // Calculating Days
   const fromDateStr = `${fromDate}`;
@@ -79,6 +79,8 @@ const Booking = () => {
       setTimeout(() => {
         navigate("/");
       }, 2000);
+
+      
     } catch (error) {
       console.log("Error Occurred", error.name);
     }
@@ -111,6 +113,11 @@ if(!fromDate && !toDate) {
         </p>
         <p>
           <strong>Price:</strong> Rs.
+          
+          {bookingdata.price}
+        </p>
+        <p>
+          <strong>Amount:</strong> Rs.
           {bookingdata.price * (differenceInDays + 1)}
         </p>
         <button className=' btn-book' onClick={() => handleBooking()}>
