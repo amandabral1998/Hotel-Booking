@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../css/AddRoom.css";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -13,35 +13,7 @@ const AddRoom = () => {
   const [img3, setImg3] = useState("");
   const [imgArr, setImgArr] = useState([]);
 
-  useEffect(() => {
-    try {
-      const Rooms = {
-        name: roomName,
-        desc: description,
-        type: type,
-        price: price,
-        img: imgArr,
-      };
-      const axiosInstance = axios.create({
-        withCredentials: true,
-      });
 
-     axiosInstance.post(
-        "http://localhost:3000/api/room/add-rooms",
-        Rooms
-      );
-      toast.success("Successfully Room Booked", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-    } catch (error) {
-      toast.error("Error! Room not Booked", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      console.log("Error Occurred", error.name);
-    }
-  }, []);
 
   const handleAddRoom = async () => {
     // Handle logic to add room
@@ -59,8 +31,40 @@ const AddRoom = () => {
         autoClose: 3000,
       });
     } else {
-      setImgArr([...imgArr, img1, img2, img3]);
+      const  updatedArr = [...imgArr, img1, img2, img3]
+      setImgArr(updatedArr);
+      // setImgArr((prevArr)=>{
+      //   return [...prevArr , img1 , img2 , img3]
+      // })
       console.log(imgArr);
+      try {        
+        const Rooms = {
+          name: roomName,
+          desc: description,
+          type: type,
+          price: price,
+          img: imgArr,
+        };
+        console.log(Rooms);
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+  
+       axiosInstance.post(
+          "http://localhost:3000/api/room/add-rooms",
+          Rooms
+        );
+        toast.success("Successfully Room Booked", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      } catch (error) {
+        toast.error("Error! Room not Booked", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.log("Error Occurred", error.name);
+      }
 
       
     }
