@@ -31,7 +31,7 @@ router.post('/reserve' , async(req, res)=>{
     // console.log(userid);
 
     try {
-        const ReservationData = await Reservation.findOne({user:userid})
+        const ReservationData = await Reservation.find({user:userid})
         if(ReservationData) {
             res.status(201).send(ReservationData)
         }

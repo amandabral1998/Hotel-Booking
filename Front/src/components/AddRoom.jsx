@@ -51,7 +51,7 @@ const AddRoom = () => {
         });
   
        axiosInstance.post(
-          "http://localhost:3000/api/room/add-rooms",
+          "https://hotelbookingbackend-4asp.onrender.com/api/room/add-rooms",
           Rooms
         );
         toast.success("Successfully Room Booked", {

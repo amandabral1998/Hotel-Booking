@@ -38,7 +38,7 @@ const Booking = () => {
         withCredentials: true,
       });
       axiosInstance
-        .post("http://localhost:3000/api/room/get-rooms", {
+        .post("https://hotelbookingbackend-4asp.onrender.com/api/room/get-rooms", {
           _id: `${bookingid}`,
         })
         .then((res) => {
@@ -69,7 +69,7 @@ const Booking = () => {
         withCredentials: true,
       });
       const response = await axiosInstance.post(
-        "http://localhost:3000/api/booking",
+        "https://hotelbookingbackend-4asp.onrender.com/api/booking",
         bookingObj
       );
       toast.success("Successfully Room Booked", {

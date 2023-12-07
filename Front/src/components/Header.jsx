@@ -13,10 +13,10 @@ const Header = () => {
         <Link to={"/"} className='link nav-link'>
           Home
         </Link>
-
-        <Link to={"/reservation"} className='link nav-link'>
+ {!user ? (null):(<Link to={"/reservation"} className='link nav-link'>
           Bookings
-        </Link>
+        </Link>)}
+        
         {user && user.user.admin && (
           <Link to={"/admin"} className='link nav-link'>
             Admin Panel

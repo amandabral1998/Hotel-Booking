@@ -11,7 +11,7 @@ const User = () => {
         withCredentials: true,
       });
       axiosInstance
-        .get("http://localhost:3000/api/user/getusers")
+        .get("https://hotelbookingbackend-4asp.onrender.com/api/user/getusers")
         .then((res) => {
           setUserData(res.data);
         });
