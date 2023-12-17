@@ -1,7 +1,7 @@
 import "../css/Booking.css";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams , Link} from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { DataContext } from "../Context/DataContext";
 
@@ -10,7 +10,7 @@ const Booking = () => {
   const id = useParams();
   const { bookingid } = id;
   const navigate = useNavigate();
-  const { fromDate, toDate , setFromDate , setToDate} = useContext(DataContext);
+  const { fromDate, toDate } = useContext(DataContext);
 
   // Calculating Days
   const fromDateStr = `${fromDate}`;
@@ -30,7 +30,7 @@ const Booking = () => {
   // Convert milliseconds to days
   const millisecondsInDay = 1000 * 60 * 60 * 24;
   const differenceInDays = Math.floor(differenceInMs / millisecondsInDay);
-// Days Calculation finished here
+  // Days Calculation finished here
 
   useEffect(() => {
     try {
@@ -38,9 +38,12 @@ const Booking = () => {
         withCredentials: true,
       });
       axiosInstance
-        .post("https://hotelbookingbackend-4asp.onrender.com/api/room/get-rooms", {
-          _id: `${bookingid}`,
-        })
+        .post(
+          "https://hotelbookingbackend-4asp.onrender.com/api/room/get-rooms",
+          {
+            _id: `${bookingid}`,
+          }
+        )
         .then((res) => {
           setBookingData(res.data);
         });
@@ -49,10 +52,23 @@ const Booking = () => {
     }
   }, [bookingid]);
 
+  
+
+ 
   // Booking Room
-  const handleBooking = async () => {
+const handleBooking = async () => {
+  try {
     const userDetail = JSON.parse(localStorage.getItem("user"));
-    const userDetails = userDetail.user;
+    const userDetails = userDetail?.user || null;
+
+    if (!userDetails) {
+     toast.warning("Please Login or Register Before Booking", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      navigate('/login');
+      return;
+    }
 
     const bookingObj = {
       user: userDetails.id,
@@ -61,35 +77,44 @@ const Booking = () => {
       from: fromDate,
       to: toDate,
       days: differenceInDays,
-      amount : differenceInDays * bookingdata.price
+      amount: differenceInDays * bookingdata.price,
     };
 
-    try {
-      const axiosInstance = axios.create({
-        withCredentials: true,
-      });
-      const response = await axiosInstance.post(
-        "https://hotelbookingbackend-4asp.onrender.com/api/booking",
-        bookingObj
-      );
-      toast.success("Successfully Room Booked", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
+    const axiosInstance = axios.create({
+      withCredentials: true,
+    });
 
-      
-    } catch (error) {
-      console.log("Error Occurred", error.name);
-    }
-  };
+    const response = await axiosInstance.post(
+      "https://hotelbookingbackend-4asp.onrender.com/api/booking",
+      bookingObj
+    );
 
-if(!fromDate && !toDate) {
-  return <div className="nodate"><p>Please Select Booking Date</p>
-  <span><Link className='nav-link' to={'/'}>Redirect to HomePage</Link>  </span></div>
-}
+    toast.success("Successfully Room Booked", {
+      position: "top-right",
+      autoClose: 3000,
+    });
+
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
+  } catch (error) {
+    console.log("Error Occurred", error.name);
+  }
+};
+
+
+  if (!fromDate && !toDate) {
+    return (
+      <div className='nodate'>
+        <p>Please Select Booking Date</p>
+        <span>
+          <Link className='nav-link' to={"/"}>
+            Redirect to HomePage
+          </Link>{" "}
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div className='booking-page'>
@@ -113,7 +138,6 @@ if(!fromDate && !toDate) {
         </p>
         <p>
           <strong>Price:</strong> Rs.
-          
           {bookingdata.price}
         </p>
         <p>
@@ -123,8 +147,6 @@ if(!fromDate && !toDate) {
         <button className=' btn-book' onClick={() => handleBooking()}>
           Book Now
         </button>
-        {/* {console.log(bookingdata)}
-        {console.log(userDetails)} */}
       </div>
     </div>
   );

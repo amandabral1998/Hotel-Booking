@@ -6,7 +6,8 @@ import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import { DatePicker, Space } from "antd";
 import { DataContext } from "../Context/DataContext";
-import { toast } from "react-toastify";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 const Rooms = () => {
   const [data, setData] = useState();
@@ -15,43 +16,50 @@ const Rooms = () => {
   const { RangePicker } = DatePicker;
   const [searchValue, setSearchValue] = useState("");
   const [filterPrice, setFilterPrice] = useState("all");
+ 
   // const [fromDate, setFromDate] = useState("");
   // const [toDate, setToDate] = useState("");
-const {setFromDate , fromDate , toDate , setToDate} = useContext(DataContext)
+  const { setFromDate, fromDate, toDate, setToDate } = useContext(DataContext);
+  const [loading , setLoading] = useState(false)
   useEffect(() => {
-//     if(!fromDate && !toDate) {
-// toast.error('Please Select Booking Dates' , {
-//   position: "top-right", // Position of the notification
-//   autoClose: 3000, // Auto close the notification after 3 seconds
-// });
+    //     if(!fromDate && !toDate) {
+    // toast.error('Please Select Booking Dates' , {
+    //   position: "top-right", // Position of the notification
+    //   autoClose: 3000, // Auto close the notification after 3 seconds
+    // });
     // }
+
    
-      try {
-        const axiosInstance = axios.create({
-          withCredentials: true,
+    try {
+      setLoading(true)
+      const axiosInstance = axios.create({
+        withCredentials: true,
+      });
+      axiosInstance
+        .get("https://hotelbookingbackend-4asp.onrender.com/api/room/get-rooms")
+        .then((res) => {
+          setData(res.data);
+          setLoading(false)
         });
-        axiosInstance
-          .get("https://hotelbookingbackend-4asp.onrender.com/api/room/get-rooms")
-          .then((res) => {
-            setData(res.data);
-          });
-      } catch (error) {
-        console.log("Error Occured", error.name);
-      
+    } catch (error) {
+      console.log("Error Occured", error.name);
     }
-   
   }, []);
 
-  const filterDates =  (dates) => {
+  const filterDates = (dates) => {
     // console.log(dates[0].format("DD/MM/YY"));
     // console.log(dates[1].format("DD/MM/YY"));
-     setFromDate(dates[0].format("DD/MM/YY"));
+    setFromDate(dates[0].format("DD/MM/YY"));
     setToDate(dates[1].format("DD/MM/YY"));
-    
   };
- 
-  
-  
+
+  if(loading) {
+    return <div className="loader d-flex flex-column gap-2 mt-4 align-items-center justify-content-center">
+      <strong>Please wait while Rooms are Loading...</strong>
+      <span> <Spinner animation="border" variant="secondary" size="md" /></span>
+    </div>
+  }
+
 
   return (
     <div className='main-container'>
@@ -90,6 +98,8 @@ const {setFromDate , fromDate , toDate , setToDate} = useContext(DataContext)
           </select>
         </div>
       </div>
+
+      
       {data &&
         data
           .filter((room) => {
@@ -173,6 +183,7 @@ const {setFromDate , fromDate , toDate , setToDate} = useContext(DataContext)
         >
           Close
         </button>
+
         <Link
           to={`/book/${selectedRoom && selectedRoom._id}`}
           className='bookbtn mt-1'
